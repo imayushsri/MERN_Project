@@ -1,0 +1,104 @@
+*{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+/* Nav */
+.nav_font{
+    font-size: 1.3vw !important;
+    color: #242b5e !important;
+    margin-left: 22px;
+}
+.nav_font:hover{
+    color: #fa236a !important;
+}
+.nav_button{
+    margin-left: 5vw;
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+.nav_register{
+    background: #fb246a !important;
+    border: none !important;
+    border-radius: 0 !important;
+    color: white !important;
+    font-size: 1vw !important;
+    height: 3vw !important;
+    width: 8vw;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+.nav_login{
+    background: white !important;
+    border: 1px solid #fb246a !important;
+    border-radius: 0% !important;
+    font-size: 1vw !important;
+    height: 3vw !important;
+    width: 8vw;
+    margin-left: 0.5vw;
+    color: #fb246a !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hero Section */
+.hero_section{
+    background: url(/img/gallery/hero/h1_hero.jpg);
+    background-size: 100% 100%;
+    min-height: 40vw;
+    display: flex !important;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+.hero_content{
+    margin-left: 15vw;
+}
+.hero_txt{
+    color: #28395a;
+    font-weight:900 !important;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 4vw;
+}
+.hero_find{
+    height: 8vh;
+    background: white;
+    width: 43vw;
+    display: flex !important;
+    align-items: center !important;
+    margin-top: 4vw;
+}
+.hero_input{
+    border: none;
+    width: 41%;
+    border-right: 2px solid #e3e6f8;
+    height: 85%;
+    color: #757575;
+    padding: 0px 1.3vw;
+    box-sizing: border-box;
+    font-size: 0.9vw;
+}
+.hero_input:focus{
+    outline: none;
+}
+.hero_button{
+    height: 100%;
+    width: 18%;
+    background: #fb246a !important;
+    border-radius: 0 !important;
+    color: #f3f5fe !important;
+    font-size: 0.8vw !important;
+    text-align: center;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+@media (max-width:650px) {
+    .hero_find{
+        height: 5vw;
+    }
+    .hero_input{
+        font-size: 1.5vw;
+    }
+}
