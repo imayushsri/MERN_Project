@@ -10,7 +10,7 @@ const RecentJob = () => {
                     <div className="recentjobs">
                         <div className="rjjobs">
                             <div className="rjj_img">
-                                <img src="../public/img/icon/job-list1.png" alt="" />
+                                <img src="/img/icon/job-list1.png" alt="" />
                             </div>
                             <div className="rjjdets">
                                 <h6 className='rj_h6'>Digital Marketer</h6>
@@ -29,7 +29,7 @@ const RecentJob = () => {
                         </div>
                         <div className="rjjobs">
                             <div className="rjj_img">
-                                <img src="../public/img/icon/job-list2.png" alt="" />
+                                <img src="/img/icon/job-list2.png" alt="" />
                             </div>
                             <div className="rjjdets">
                                 <h6 className='rj_h6'>Digital Marketer</h6>
@@ -48,7 +48,7 @@ const RecentJob = () => {
                         </div>
                         <div className="rjjobs">
                             <div className="rjj_img">
-                                <img src="../public/img/icon/job-list3.png" alt="" />
+                                <img src="/img/icon/job-list3.png" alt="" />
                             </div>
                             <div className="rjjdets">
                                 <h6 className='rj_h6'>Digital Marketer</h6>
@@ -67,7 +67,7 @@ const RecentJob = () => {
                         </div>
                         <div className="rjjobs">
                             <div className="rjj_img">
-                                <img src="../public/img/icon/job-list4.png" alt="" />
+                                <img src="/img/icon/job-list4.png" alt="" />
                             </div>
                             <div className="rjjdets">
                                 <h6 className='rj_h6'>Digital Marketer</h6>

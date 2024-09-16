@@ -5,7 +5,7 @@ const Messages = () => {
     <>
       <div className="messages">
         <div className="mess_img">
-            <img src="public/img/testmonial/testimonial-founder.png" alt="" />
+            <img src="/img/testmonial/testimonial-founder.png" alt="" />
         </div>
         <div className="mess_name">
             <h6 className='mess_h6'>Margaret Lawson</h6>
