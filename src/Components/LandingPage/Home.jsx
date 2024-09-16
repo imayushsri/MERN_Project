@@ -1,28 +1,26 @@
 import React from 'react'
+import Hero from './Hero'
+import TopCategory from './TopCategory'
+import UploadCv from './UploadCv'
+import RecentJob from './RecentJob'
+import How from './How'
+import Messages from './Messages'
+import Doing from './Doing'
+import News from './News'
+import Footer from './Footer'
 
 const Home = () => {
   return (
     <>
-      <div className="row">
-        <div className="col-sm-12 hero_section">
-              <div className="row">
-                  <div className="hero_txt_section">
-                    <div className="hero_content">
-                    <h1 className='hero_txt'>Find the</h1>
-                    <h1 className='hero_txt'>most exciting</h1>
-                    <h1 className='hero_txt'>startup jobs</h1>
-                    <div className="hero_find">
-                    <input type="text" className='hero_input' placeholder='Job Title or Keyword'/>
-                    <select className='hero_input' style={{borderRight:"3px solid white"}}>
-                      <option>Location BD</option>
-                    </select>
-                    <div className="btn btn-danger hero_button">Find Job</div>
-                    </div>
-                    </div>
-                  </div>
-              </div>
-        </div>
-      </div>
+      <Hero/>
+      <TopCategory/>
+      <UploadCv/>
+      <RecentJob/>
+      <How/>
+      <Messages/>
+      <Doing/>
+      <News/>
+      <Footer/>
     </>
   )
 }
