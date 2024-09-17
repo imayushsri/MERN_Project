@@ -1,5 +1,5 @@
-import React from 'react'
-
+import React from 'react';
+import Typewriter from 'typewriter-effect';
 const Hero = () => {
   return (
     <>
@@ -8,9 +8,13 @@ const Hero = () => {
           <div className="row">
             <div className="hero_txt_section">
               <div className="hero_content">
-                <h1 className='hero_txt'>Find the</h1>
-                <h1 className='hero_txt'>most exciting</h1>
-                <h1 className='hero_txt'>startup jobs</h1>
+                <h1 className='hero_txt'><Typewriter
+                  options={{
+                    strings: ['Find the most exciting startup jobs'],
+                    autoStart: true,
+                    loop: true,
+                  }}
+                /></h1>
                 <div className="hero_find">
                   <input type="text" className='hero_input' placeholder='Job Title or Keyword' />
                   <select className='hero_input' style={{ borderRight: "3px solid white" }}>

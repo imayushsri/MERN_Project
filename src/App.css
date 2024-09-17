@@ -53,10 +53,12 @@
     display: flex !important;
     flex-direction: column;
     align-items: start;
-    justify-content: center;
+    /* justify-content: center; */
 }
 .hero_content{
     margin-left: 15vw;
+    margin-right: 49vw;
+    margin-top: 10vw;
 }
 .hero_txt{
     color: #28395a;
@@ -70,7 +72,8 @@
     width: 43vw;
     display: flex !important;
     align-items: center !important;
-    margin-top: 4vw;
+    position: absolute;
+    bottom: 5vw;
 }
 .hero_input{
     border: none;
