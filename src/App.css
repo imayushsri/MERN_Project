@@ -58,7 +58,8 @@
 .hero_content{
     margin-left: 15vw;
     margin-right: 49vw;
-    margin-top: 10vw;
+    margin-top: 8vw;
+    position: relative;
 }
 .hero_txt{
     color: #28395a;
@@ -73,7 +74,7 @@
     display: flex !important;
     align-items: center !important;
     position: absolute;
-    bottom: 5vw;
+    top: 22vw;
 }
 .hero_input{
     border: none;
