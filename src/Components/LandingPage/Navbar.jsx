@@ -40,7 +40,7 @@ const Navbar = () => {
                                             About
                                         </Link>
                                     </li>
-                                    <li className="nav-item">
+                                    <li className="nav-item me-5">
                                         <Link className="nav-link nav_font" to="/contact">
                                             Contact
                                         </Link>

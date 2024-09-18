@@ -14,7 +14,7 @@
     color: #fa236a !important;
 }
 .nav_button{
-    margin-left: 5vw;
+    margin-left: 20px;
     display: flex;
     height: 100%;
     align-items: center;
@@ -608,6 +608,9 @@ margin-bottom: 1vw;
     }
     .hero_input{
         font-size: 1.5vw;
+    }
+    .tc_p{
+        font-size: 2.5vw;
     }
     .how_boxes{
         width: 90%;
