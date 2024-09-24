@@ -80,6 +80,7 @@ const companyDetails = await recruiterTable.findOne({_id:item.companyId});  //st
             _id: item._id,
             category: item.category,
             jobType: item.jobType,
+            experience: item.experience,
             jobLocation: item.jobLocation,
             jobTitle: item.jobTitle,
             applyDate: item.applyDate,

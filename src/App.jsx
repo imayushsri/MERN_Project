@@ -19,6 +19,7 @@ import RecruiterUpdate from './Components/Recruiter/RecruiterUpdate';
 import JobSeekerUpdate from './Components/JobSeeker/JobSeekerUpdate';
 import PostedJob from './Components/Recruiter/postedJob';
 import AdminUpdate from './Components/Admin/AdminUpdate';
+import JobSeekerApply from './Components/JobSeeker/JobSeekerApply';
 
 const App = () => {
   return (
@@ -42,7 +43,7 @@ const App = () => {
             <Route path='/seeker/register' element={<JobseekerRegister/>} />
             <Route path='/seeker/login' element={<SeekerLogin/>} />
             <Route path='/seeker' element={<h1>Seeker Dashboard</h1>} />
-            <Route path='/seeker/jobapply' element={<h1>Seeker Job apply</h1>} />
+            <Route path='/seeker/jobapply' element={<JobSeekerApply/>} />
             <Route path='/seeker/update' element={<JobSeekerUpdate/>} />
             <Route path='/seeker/jobapplied' element={<h1>Seeker job applied</h1>} />
 
