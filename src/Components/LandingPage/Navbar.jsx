@@ -43,7 +43,7 @@ const Navbar = () => {
                         <nav className="navbar navbar-expand-lg navbar-light">
                             <div className="container-fluid">
                                 <Link className="navbar-brand nav_font" to="/admin">
-                                    <img src="/public/img/logo/logo.png" alt="logo" height="50vw" />
+                                    <img src={`http://localhost:8000/upload/${data.image}`} alt="logo" height="50vw" className='nav_img' />
                                 </Link>
                                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                     <span className="navbar-toggler-icon" />
@@ -71,7 +71,7 @@ const Navbar = () => {
                                             </Link>
                                         </li>
                                         <li className="nav-item me-5" onClick={adminLogout}>
-                                            <Link className="nav-link nav_font">
+                                            <Link className="nav-link nav_font nav_login">
                                                 Logout
                                             </Link>
                                         </li>
@@ -95,7 +95,7 @@ const Navbar = () => {
                         <nav className="navbar navbar-expand-lg navbar-light">
                             <div className="container-fluid">
                                 <Link className="navbar-brand nav_font" to="/seeker">
-                                    <img src="/public/img/logo/logo.png" alt="logo" height="50vw" />
+                                    <img src={`http://localhost:8000/upload/${data.image}`} alt="logo" height="50vw" />
                                 </Link>
                                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                     <span className="navbar-toggler-icon" />
@@ -123,7 +123,7 @@ const Navbar = () => {
                                             </Link>
                                         </li>
                                         <li className="nav-item me-5" onClick={seekerLogout}>
-                                            <Link className="nav-link nav_font">
+                                            <Link className="nav-link nav_font nav_login">
                                                 Logout
                                             </Link>
                                         </li>
@@ -147,7 +147,7 @@ const Navbar = () => {
                         <nav className="navbar navbar-expand-lg navbar-light">
                             <div className="container-fluid">
                                 <Link className="navbar-brand nav_font" to="/recruiter">
-                                    <img src="/public/img/logo/logo.png" alt="logo" height="50vw" />
+                                    <img src={`http://localhost:8000/upload/${data.logo}`} alt="logo" height="50vw" />
                                 </Link>
                                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                     <span className="navbar-toggler-icon" />

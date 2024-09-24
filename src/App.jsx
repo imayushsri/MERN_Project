@@ -17,6 +17,8 @@ import RecruiterList from './Components/Admin/RecruiterList';
 import RecruiterPostedJobs from './Components/Recruiter/RecruiterPostedJobs';
 import RecruiterUpdate from './Components/Recruiter/RecruiterUpdate';
 import JobSeekerUpdate from './Components/JobSeeker/JobSeekerUpdate';
+import PostedJob from './Components/Recruiter/postedJob';
+import AdminUpdate from './Components/Admin/AdminUpdate';
 
 const App = () => {
   return (
@@ -32,7 +34,7 @@ const App = () => {
             {/* admin route */}
             <Route path='/admin' element={<h1>Admin Dashboard</h1>} />
             <Route path='/admin/login' element={<AdminLogin/>} />
-            <Route path='/admin/update' element={<h1>Admin Profile Update</h1>} />
+            <Route path='/admin/update' element={<AdminUpdate/>} />
             <Route path='/admin/seekerlist' element={<SeekerList/>} />
             <Route path='/admin/recruiterlist' element={<RecruiterList/>} />
 
@@ -49,7 +51,7 @@ const App = () => {
             <Route path='/recruiter/login' element={<RecruiterLogin/>}/>
             <Route path='/recruiter' element={<RecruiterPostedJobs/>}/>
             <Route path='/recruiter/jobpost' element={<Postjob/>}/>
-            <Route path='/recruiter/appliedjob' element={<h1>Recruiter applied job</h1>}/>
+            <Route path='/recruiter/appliedjob' element={<PostedJob/>}/>
             <Route path='/recruiter/update' element={<RecruiterUpdate/>}/>
 
             <Route path='*' element={<><h1>404 Page Not Found</h1></>} />
