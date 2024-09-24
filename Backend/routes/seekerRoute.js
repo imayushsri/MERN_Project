@@ -3,6 +3,8 @@ const seekerRoute = express.Router();  //Extract router from express
 const { seekerTable } = require('../models/seekerModel');
 const { jobPostTable } = require('../models/jobpost');
 const { recruiterTable } = require('../models/recruiterModel');
+const {appliedJobTable} = require('../models/appliedJobs');
+const { date } = require('yup');
 
 // insert data
 seekerRoute.post('/seeker-register', async (req, res) => {
@@ -85,6 +87,26 @@ seekerRoute.get('/seeker-joblist', async(req,res)=>{
     })
     })
 
+
+seekerRoute.post('/seeker-apply',async(req,res)=>{
+    const {jobId, companyId, userId} = req.body;
+    const isApplied = await appliedJobTable.findOne({jobId, userId});
+    if (isApplied) {
+        res.json({
+            code: 301,
+            message: 'Already Applied',
+            data: isApplied
+        })
+    } else {
+        const data = new appliedJobTable({jobId, userId, companyId})
+        const result = await data.save();
+        res.json({
+            code: 200,
+            message: 'Applied Succefull!',
+            data: result
+        })
+    }
+})
 
 //Export module
 module.exports = { seekerRoute }

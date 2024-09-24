@@ -5,7 +5,7 @@ const JobSeekerApply = () => {
     const [jobData, setJobData] = useState([]);
     useEffect(() => {
         const tempData = JSON.parse(localStorage.getItem('data'));
-        // setDataId(tempData._id);
+        setDataId(tempData._id);
         getData();
         // console.log(tempData._id, 'temp');
     }, [dataId]);
@@ -22,6 +22,27 @@ const JobSeekerApply = () => {
         // console.log(dataId, '1111111111111111');
         console.log(jobData)
     }
+
+const handleApply = async(element) =>{
+    const companyId = element.companyId;
+    const jobId = element._id;
+const payload={
+    companyId: companyId,
+    jobId : jobId,
+    userId: dataId
+}
+    const response = await axios.post('http://localhost:8000/api/seeker-apply', payload, {
+        headers:{
+            'Content-Type':'application/json'
+        }
+    })
+    if(response.data.code==200){
+        alert('Applied Succefully');
+    }
+    else{
+        alert('You have Already Applied')
+    }
+}
 
   return (
     <>
@@ -54,7 +75,7 @@ const JobSeekerApply = () => {
                             <div className="col-md-3">
                                 <div className='postedjob_p2 mb-2'>Vacancies: <span className='postedjob_p1'> {el.vacancies}</span></div>
                                 <div className='postedjob_p2 mb-2'>Apply By: <span className='postedjob_p1'> {el.applyDate}</span></div>
-                                <input className='form_button mt-3' type='submit' value='APPLY NOW' style={{width:'150px', fontSize:"0.8em"}}/>
+                                <input className='form_button mt-3' onClick={()=>handleApply(el)} type='submit' value='APPLY NOW' style={{width:'150px', fontSize:"0.8em"}}/>
                             </div>
                         </div>
                         </div>
