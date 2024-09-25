@@ -41,8 +41,11 @@ const { register, handleSubmit, formState: { errors } } = useForm({
         alert('Login Successfull!');
         navigate('/seeker')
       }
-      else{
-        alert('Invalid Email or Password!');
+      else if(response.data.code == 203){
+        alert('Your Account is Blocked, Please Contact to Admin');
+      }
+      else if(response.data.code == 302){
+        alert("Invalid Email or Password!")
       }
   }
 

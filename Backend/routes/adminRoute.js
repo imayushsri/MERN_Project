@@ -92,5 +92,18 @@ adminRoute.put('/admin-update/:_id', async (req, res) => {
     });
 });
 
+adminRoute.put('/admin-seekerblock/:_id',async(req, res)=>{
+    const _id = req.params._id;
+    const status = req.body.status;
+    const result = await seekerTable.findByIdAndUpdate({_id:_id},
+        {$set:{isBlock: status}},
+        {new: true})
+        res.json({
+            code: 200,
+            message: "Updated Successfully",
+            data: result
+        })
+})
+
 //Export module
 module.exports = { adminRoute }

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { boolean } = require('yup');
 
 //Create Schema
 const seekerSchema = new mongoose.Schema({
@@ -11,6 +12,7 @@ const seekerSchema = new mongoose.Schema({
     jobPreference: { type: String, required: true },
     image: { type: String, required: true },
     resume: { type: String, required: true },
+    isBlock: {type : Boolean, default:false},
     createdAt: { type: Date, default: Date.now() },
     updatedAt: { type: Date, default: Date.now() }
 });

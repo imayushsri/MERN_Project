@@ -3,7 +3,7 @@ const seekerRoute = express.Router();  //Extract router from express
 const { seekerTable } = require('../models/seekerModel');
 const { jobPostTable } = require('../models/jobpost');
 const { recruiterTable } = require('../models/recruiterModel');
-const {appliedJobTable} = require('../models/appliedJobs');
+const { appliedJobTable } = require('../models/appliedJobs');
 const { date } = require('yup');
 
 // insert data
@@ -37,36 +37,46 @@ seekerRoute.post('/seeker-register', async (req, res) => {
 });
 
 // Login
-seekerRoute.post('/seeker-login', async(req,res)=>{
-    const {email, password} = req.body;
-    const result = await seekerTable.findOne({email, password})
-    if(result){
-        res.json({
-            code: 200,
-            message: 'Login Successfull',
-            data : result
-        })
+seekerRoute.post('/seeker-login', async (req, res) => {
+    const { email, password } = req.body;
+    const result = await seekerTable.findOne({ email, password })
+    if (result) {
+        if (result.isBlock) {
+            res.json({
+                code: 203,
+                message: "Your Account is Blocked",
+                data: {}
+            })
+        }
+        else {
+            res.json({
+                code: 200,
+                message: "Login Successful",
+                data: result
+            })
+        }
+        
     }
-    else{
+    else {
         res.json({
-            code: 404,
-            message: 'Invalid Email or Password',
-            data: []
+            code: 302,
+            message: "Invalid Email Password",
+            data: {}
         })
     }
 });
 
 //All Jobs list
-seekerRoute.get('/seeker-joblist', async(req,res)=>{
+seekerRoute.get('/seeker-joblist', async (req, res) => {
     const jobPost = await jobPostTable.find();
     const finalData = await Promise.all(  //store all data that need in frontend
-    jobPost.map(async(item)=>{
-    const companyDetails = await recruiterTable.findOne({_id:item.companyId});  //store recruites table dets
-    
-        // return all data that need in frontend
-            return{
+        jobPost.map(async (item) => {
+            const companyDetails = await recruiterTable.findOne({ _id: item.companyId });  //store recruites table dets
+
+            // return all data that need in frontend
+            return {
                 _id: item?._id,  // ? is handelling null value
-                companyId:item?.companyId,
+                companyId: item?.companyId,
                 category: item?.category,
                 jobType: item?.jobType,
                 experience: item?.experience,
@@ -85,12 +95,12 @@ seekerRoute.get('/seeker-joblist', async(req,res)=>{
         message: 'Data Found!',
         data: finalData
     })
-    })
+})
 
 
-seekerRoute.post('/seeker-apply',async(req,res)=>{
-    const {jobId, companyId, userId} = req.body;
-    const isApplied = await appliedJobTable.findOne({jobId, userId});
+seekerRoute.post('/seeker-apply', async (req, res) => {
+    const { jobId, companyId, userId } = req.body;
+    const isApplied = await appliedJobTable.findOne({ jobId, userId });
     if (isApplied) {
         res.json({
             code: 301,
@@ -98,7 +108,7 @@ seekerRoute.post('/seeker-apply',async(req,res)=>{
             data: isApplied
         })
     } else {
-        const data = new appliedJobTable({jobId, userId, companyId})
+        const data = new appliedJobTable({ jobId, userId, companyId })
         const result = await data.save();
         res.json({
             code: 200,
@@ -109,14 +119,14 @@ seekerRoute.post('/seeker-apply',async(req,res)=>{
 })
 
 //Applied list
-seekerRoute.post('/seeker-applied',async(req, res)=>{
-    const {userId} = req.body;
-    const appliedList = await appliedJobTable.find({userId});
+seekerRoute.post('/seeker-applied', async (req, res) => {
+    const { userId } = req.body;
+    const appliedList = await appliedJobTable.find({ userId });
     const finalData = await Promise.all(
-        appliedList.map(async(item)=>{
-            const jobData = await jobPostTable.findOne({_id:item.jobId});
-            const companyData = await recruiterTable.findOne({_id:item.companyId});
-            return{
+        appliedList.map(async (item) => {
+            const jobData = await jobPostTable.findOne({ _id: item.jobId });
+            const companyData = await recruiterTable.findOne({ _id: item.companyId });
+            return {
                 _id: item?._id,
                 jobId: item?.jobId,
                 jobTitle: jobData?.jobTitle,
@@ -165,7 +175,7 @@ seekerRoute.put('/seeker-update/:_id', async (req, res) => {
         }
     });
 
-    const result = await seekerTable.findByIdAndUpdate({ _id: id }, { name: name, email: email, contact: contact, password: password, location: location, image: image.name, resume: resume.name, jobPreference: jobPreference, qualification:qualification });
+    const result = await seekerTable.findByIdAndUpdate({ _id: id }, { name: name, email: email, contact: contact, password: password, location: location, image: image.name, resume: resume.name, jobPreference: jobPreference, qualification: qualification });
 
     res.json({
         code: 200,

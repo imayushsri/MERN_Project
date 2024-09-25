@@ -20,12 +20,28 @@ const [seeker, setSeeker] = useState([]);
             setSeeker(response.data.data);
         }
     }
+
+    const handleBlock = async(el)=>{
+        // console.log(el, "ppppppppppp");
+        const payload = {
+            status: el.isBlock ? false : true
+        }
+       const response = await axios.put(`http://localhost:8000/api/admin-seekerblock/${el._id}`, payload,{
+            headers:{
+                'Content-Type':'application/json'
+            }
+        })
+        if (response.data.code == 200) {
+            alert("Status Updated Succefully")
+            fetchData()
+        }
+    }
     return (
         <>
             <div className="container">
                 <div className="row justify-content-center">
-                    {seeker.map((el,ind)=>(
-                        <div className="col-md-5 my-3" key={ind}>
+                    {seeker.map((el)=>(
+                        <div className="col-md-5 my-3">
                         <div className="card text-center px-2">
                             <img
                                 src={`http://localhost:8000/upload/${el.image}`}
@@ -58,7 +74,7 @@ const [seeker, setSeeker] = useState([]);
                                 </div>
                             </div>
                             <div>
-                                <input type='submit' className='form_button mb-4' value='BLOCK' style={{width:"20%"}} />
+                                <div onClick={()=>handleBlock(el)} className='form_button mb-4' style={{width:"20%", margin:"0px auto", fontSize:"0.8em"}}>{el.isBlock ? "UNBLOCK" : "BLOCK"}</div>
                             </div>
                         </div>
                     </div>
