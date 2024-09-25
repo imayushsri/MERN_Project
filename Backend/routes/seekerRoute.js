@@ -13,13 +13,13 @@ seekerRoute.post('/seeker-register', async (req, res) => {
     let resume = req.files.resume;
 
     //Move file to uploads
-    await image.mv('uploads/' + image.name, (err) => {
+    await image.mv('Backend/uploads/' + image.name, (err) => {
         if (err) {
             res.send(err);
         }
     });
 
-    await resume.mv('uploads/' + resume.name, (err) => {
+    await resume.mv('Backend/uploads/' + resume.name, (err) => {
         if (err) {
             res.send(err);
         }
@@ -107,6 +107,71 @@ seekerRoute.post('/seeker-apply',async(req,res)=>{
         })
     }
 })
+
+//Applied list
+seekerRoute.post('/seeker-applied',async(req, res)=>{
+    const {userId} = req.body;
+    const appliedList = await appliedJobTable.find({userId});
+    const finalData = await Promise.all(
+        appliedList.map(async(item)=>{
+            const jobData = await jobPostTable.findOne({_id:item.jobId});
+            const companyData = await recruiterTable.findOne({_id:item.companyId});
+            return{
+                _id: item?._id,
+                jobId: item?.jobId,
+                jobTitle: jobData?.jobTitle,
+                experience: jobData?.experience,
+                jobType: jobData?.jobType,
+                jobLocation: jobData?.jobLocation,
+                salary: jobData?.salary,
+                applyDate: jobData?.applyDate,
+                category: jobData?.category,
+                vacancies: jobData?.vacancies,
+                name: companyData?.name,
+                logo: companyData?.logo
+            }
+        })
+    )
+    res.json({
+        code: 200,
+        message: 'Data Found!',
+        data: finalData
+    })
+})
+
+
+//update data
+seekerRoute.put('/seeker-update/:_id', async (req, res) => {
+    const id = req.params._id;
+    const name = req.body.name;
+    const email = req.body.email;
+    const contact = req.body.contact;
+    const password = req.body.password;
+    const location = req.body.location;
+    const jobPreference = req.body.jobPreference;
+    const qualification = req.body.qualification;
+    let image = req.files.image;
+    let resume = req.files.resume;
+
+    //Move file to uploads
+    await image.mv('Backend/uploads/' + image.name, (err) => {
+        if (err) {
+            res.send(err);
+        }
+    });
+    await resume.mv('Backend/uploads/' + resume.name, (err) => {
+        if (err) {
+            res.send(err);
+        }
+    });
+
+    const result = await seekerTable.findByIdAndUpdate({ _id: id }, { name: name, email: email, contact: contact, password: password, location: location, image: image.name, resume: resume.name, jobPreference: jobPreference, qualification:qualification });
+
+    res.json({
+        code: 200,
+        data: result
+    });
+});
 
 //Export module
 module.exports = { seekerRoute }

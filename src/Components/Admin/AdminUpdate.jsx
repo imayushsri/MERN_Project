@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';    // Form Validation
 import { yupResolver } from '@hookform/resolvers/yup';   // Form Validation
 import * as yup from 'yup';   // Form Validation
+import axios from 'axios';
 
 const schema = yup
     .object()
@@ -16,22 +17,41 @@ const schema = yup
 
 
 const AdminUpdate = () => {
-
+    useEffect(()=>{
+        const adminDetails = JSON.parse(localStorage.getItem('data'));
+        if (adminDetails) {
+            setValue('name',adminDetails.name)
+            setValue('email',adminDetails.email)
+            setValue('password',adminDetails.password)
+            // setValue('image',adminDetails.image)
+        }
+    },[])
     // form validation useform Hook
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
     });
 
     const handleData = async (data) => {
+        if (!data || data.image.length == 0) {
+            alert('Please Select Image')
+            return;
+        }
+        const tempdata = JSON.parse(localStorage.getItem('data'));
         const formData = new FormData();
         formData.append('name', data.name);
         formData.append('email', data.email);
-        formData.append('contact', data.contact);
         formData.append('password', data.password);
-        formData.append('location', data.location);
-        formData.append('image', data.logo[0]);
-    }
+        formData.append('image', data.image[0]);
 
+        const response = await axios.put(`http://localhost:8000/api/admin-update/${tempdata._id}`, formData, {
+            headers:{
+                'Content-Type':'multipart/form-data'
+            }
+        })
+        if(response.data.code==200){
+            alert("Profile Updated Succefully");
+        }
+    }
 
     return (
         <>
@@ -50,7 +70,7 @@ const AdminUpdate = () => {
                         </div>
                         <div>
                         <label className="ms-1 mb-1">Email: </label>
-                            <input {...register('email')} className='form_input' type="text" name="email" placeholder='Enter Your Email'/>
+                            <input {...register('email')} readOnly className='form_input' type="text" name="email" placeholder='Enter Your Email'/>
                             {errors.email?.message && <span className='err_span'>{errors.email?.message}</span>}
                         </div>
                     </div>

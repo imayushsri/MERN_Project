@@ -12,7 +12,7 @@ adminRoute.post('/admin-register', async (req, res) => {
     const image = req.files.image;
 
     //Move file to uploads
-    await image.mv('uploads/' + image.name, (err) => {
+    await image.mv('Backend/uploads/' + image.name, (err) => {
         if (err) {
             res.send(err);
         }
@@ -65,6 +65,32 @@ adminRoute.get('/admin-seekerlist', async (req, res) => {
         })
     }
 })
+
+//update
+adminRoute.put('/admin-update/:_id', async (req, res) => {
+    const id = req.params._id;
+    const name = req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
+    let image = req.files.image;
+// console.log(image);
+
+    //Move file to uploads
+      await image.mv('Backend/uploads/' + image.name, (err) => {
+        if (err) {
+            // res.send(err);
+        }
+    });
+
+    const result = await adminTable.findByIdAndUpdate({ _id:id },
+        { name: name, email: email, password: password, image: image.name });
+
+    res.json({
+        code: 200,
+        message:'Data Updated',
+        data: result
+    });
+});
 
 //Export module
 module.exports = { adminRoute }

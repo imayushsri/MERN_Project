@@ -60,14 +60,9 @@ const Navbar = () => {
                                                 Seeker List
                                             </Link>
                                         </li>
-                                        <li className="nav-item">
+                                        <li className="nav-item me-5">
                                             <Link className="nav-link nav_font" to="/admin/recruiterlist">
                                                 Recruiter List
-                                            </Link>
-                                        </li>
-                                        <li className="nav-item me-5">
-                                            <Link className="nav-link nav_font" to="/admin/update">
-                                                Update Profile
                                             </Link>
                                         </li>
                                         <li className="nav-item me-5" onClick={adminLogout}>
@@ -165,13 +160,13 @@ const Navbar = () => {
                                             </Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link className="nav-link nav_font" to="/recruiter/appliedjob">
-                                                Applied Job
+                                            <Link className="nav-link nav_font" to="/recruiter/postedjob">
+                                                Posted Job
                                             </Link>
                                         </li>
                                         <li className="nav-item me-5">
-                                            <Link className="nav-link nav_font" to="/recruiter/update">
-                                                Update Profile
+                                            <Link className="nav-link nav_font" to="/recruiter/appliedjob">
+                                                Applied Job
                                             </Link>
                                         </li>
                                         <li className="nav-item me-5" onClick={recruiterLogout}>

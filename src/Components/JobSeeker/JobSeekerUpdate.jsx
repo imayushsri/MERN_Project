@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';    // Form Validation
 import { yupResolver } from '@hookform/resolvers/yup';   // Form Validation
 import * as yup from 'yup';   // Form Validation
@@ -21,12 +21,31 @@ const schema = yup
 
 const JobSeekerUpdate = () => {
 
+    useEffect(()=>{
+        const seekerDetails = JSON.parse(localStorage.getItem('data'));
+        if (seekerDetails) {
+            setValue('name',seekerDetails.name)
+            setValue('email',seekerDetails.email)
+            setValue('location',seekerDetails.location)
+            setValue('contact',seekerDetails.contact)
+            setValue('password',seekerDetails.password)
+            setValue('jobPreference',seekerDetails.jobPreference)
+            setValue('qualification',seekerDetails.qualification)
+            // setValue('logo',adminDetails.logo)
+        }
+    },[])
+
 // form validation useform Hook
-const { register, handleSubmit, formState: { errors } } = useForm({
+const { register, handleSubmit,setValue, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
 
   const handleData = async(data) =>{
+    if (!data || data.image.length == 0) {
+        alert('Please Select Image')
+        return;
+    }
+    const tempdata = JSON.parse(localStorage.getItem('data'));
     const formData = new FormData();
     formData.append('name',data.name);
     formData.append('email',data.email);
@@ -38,14 +57,13 @@ const { register, handleSubmit, formState: { errors } } = useForm({
     formData.append('qualification', data.qualification);
     formData.append('jobPreference', data.jobPreference);
     // API Calling
-    const response = await axios.post('http://localhost:8000/api/seeker-register', formData, {
+    const response = await axios.put(`http://localhost:8000/api/seeker-update/${tempdata._id}`, formData, {
       headers:{
         'Content-Type':'multipart/form-data'
       }
     })
-    alert("Registration Successfull !")
+    alert("Profile Updated Successfull !")
   }
-
     return (
         <>
             <div className="form">

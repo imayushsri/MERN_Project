@@ -837,7 +837,7 @@ margin-bottom: 15px;
 }
 .postedjob_logo{
     /* width: 120px; */
-    background-color: black;
+    /* background-color: black; */
     height: 120px;
     display: flex;
     align-items: start;
@@ -849,6 +849,19 @@ margin-bottom: 15px;
 .postedjob_logo img{
     width: 100%;
     height: 100%;
+}
+
+
+
+.form_label{
+    font-weight: 600;
+    color: #074f88;
+}
+.form_card{
+    border: 1.5px solid #074f88 !important;
+}
+.form_cardheader{
+    border-bottom: 1.5px solid #074f88 !important;
 }
   
 /* Recruiter Posted job */

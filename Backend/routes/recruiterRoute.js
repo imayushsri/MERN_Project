@@ -2,6 +2,8 @@ const express = require('express');
 const recruiterRoute = express.Router();  //Extract router from express
 const { recruiterTable } = require('../models/recruiterModel');
 const { jobPostTable } = require('../models/jobpost');
+const {appliedJobTable} = require('../models/appliedJobs');
+const { seekerTable } = require('../models/seekerModel');
 
 // insert data
 recruiterRoute.post('/recruiter-register', async (req, res) => {
@@ -13,7 +15,7 @@ recruiterRoute.post('/recruiter-register', async (req, res) => {
     let logo = req.files.logo;
 
     //Move file to uploads
-    await logo.mv('uploads/' + logo.name, (err) => {
+    await logo.mv('Backend/uploads/' + logo.name, (err) => {
         if (err) {
             res.send(err);
         }
@@ -98,6 +100,40 @@ res.json({
 })
 })
 
+//Applied Seekers
+recruiterRoute.post('/recruiter-applied',async(req, res)=>{
+    const {companyId} = req.body;
+    const appliedList = await appliedJobTable.find({companyId});
+    const finalData = await Promise.all(
+        appliedList.map(async(item)=>{
+            const jobData = await jobPostTable.findOne({_id:item.jobId});
+            const seekerData = await seekerTable.findOne({_id:item.userId});
+            return{
+                _id: item?._id,
+                jobId: item?.jobId,
+                jobTitle: jobData?.jobTitle,
+                experience: jobData?.experience,
+                jobType: jobData?.jobType,
+                jobLocation: jobData?.jobLocation,
+                salary: jobData?.salary,
+                applyDate: jobData?.applyDate,
+                category: jobData?.category,
+                vacancies: jobData?.vacancies,
+                name: seekerData?.name,
+                image: seekerData?.image,
+                contact: seekerData?.contact,
+                email: seekerData?.email,
+                resume: seekerData?.resume
+            }
+        })
+    )
+    res.json({
+        code: 200,
+        message: 'Data Found!',
+        data: finalData
+    })
+})
+
 
 // get data
 recruiterRoute.get('/recruiter-get/:_id', async (req, res) => {
@@ -121,7 +157,7 @@ recruiterRoute.put('/recruiter-update/:_id', async (req, res) => {
     let logo = req.files.logo;
 
     //Move file to uploads
-    await logo.mv('uploads/' + logo.name, (err) => {
+    await logo.mv('Backend/uploads/' + logo.name, (err) => {
         if (err) {
             res.send(err);
         }

@@ -17,9 +17,11 @@ import RecruiterList from './Components/Admin/RecruiterList';
 import RecruiterPostedJobs from './Components/Recruiter/RecruiterPostedJobs';
 import RecruiterUpdate from './Components/Recruiter/RecruiterUpdate';
 import JobSeekerUpdate from './Components/JobSeeker/JobSeekerUpdate';
-import PostedJob from './Components/Recruiter/postedJob';
+import PostedJob from './Components/Recruiter/RecruiterAppliedJob';
 import AdminUpdate from './Components/Admin/AdminUpdate';
 import JobSeekerApply from './Components/JobSeeker/JobSeekerApply';
+import SeekerAppliedJob from './Components/JobSeeker/SeekerAppliedJob';
+import RecruiterAppliedJob from './Components/Recruiter/RecruiterAppliedJob';
 
 const App = () => {
   return (
@@ -33,9 +35,9 @@ const App = () => {
             <Route path='/about' element={<h1>About</h1>} />
             <Route path='/contact' element={<h1>Contact</h1>} />
             {/* admin route */}
-            <Route path='/admin' element={<h1>Admin Dashboard</h1>} />
+            <Route path='/admin' element={<AdminUpdate/>} />
             <Route path='/admin/login' element={<AdminLogin/>} />
-            <Route path='/admin/update' element={<AdminUpdate/>} />
+            <Route path='/admin/update' element={<><h1>updates</h1></>} />
             <Route path='/admin/seekerlist' element={<SeekerList/>} />
             <Route path='/admin/recruiterlist' element={<RecruiterList/>} />
 
@@ -45,15 +47,17 @@ const App = () => {
             <Route path='/seeker' element={<h1>Seeker Dashboard</h1>} />
             <Route path='/seeker/jobapply' element={<JobSeekerApply/>} />
             <Route path='/seeker/update' element={<JobSeekerUpdate/>} />
-            <Route path='/seeker/jobapplied' element={<h1>Seeker job applied</h1>} />
+            <Route path='/seeker/jobapplied' element={<SeekerAppliedJob/>} />
 
             {/* Recruiter route */}
             <Route path='/recruiter/register' element={<RecruiterRegister/>}/>
             <Route path='/recruiter/login' element={<RecruiterLogin/>}/>
-            <Route path='/recruiter' element={<RecruiterPostedJobs/>}/>
+            <Route path='/recruiter' element={<RecruiterUpdate/>}/>
             <Route path='/recruiter/jobpost' element={<Postjob/>}/>
-            <Route path='/recruiter/appliedjob' element={<PostedJob/>}/>
-            <Route path='/recruiter/update' element={<RecruiterUpdate/>}/>
+            <Route path='/recruiter/postedjob' element={<RecruiterPostedJobs/>}/>
+            <Route path='/recruiter/appliedjob' element={<RecruiterAppliedJob/>}/>
+            <Route path='/recruiter/appliedjob' element={<RecruiterAppliedJob/>}/>
+            {/* <Route path='/recruiter/update' element={}/> */}
 
             <Route path='*' element={<><h1>404 Page Not Found</h1></>} />
           </Routes>
