@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { IoMdHome } from "react-icons/io";
+
 
 const Navbar = () => {
 
@@ -52,7 +54,7 @@ const Navbar = () => {
                                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                         <li className="nav-item">
                                             <Link className="nav-link active nav_font" aria-current="page" to="/admin">
-                                                Home
+                                                <IoMdHome className='nav_icons'/>Home
                                             </Link>
                                         </li>
                                         <li className="nav-item">

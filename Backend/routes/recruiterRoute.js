@@ -37,17 +37,25 @@ recruiterRoute.post('/recruiter-login', async (req, res) => {
     const { email, password } = req.body;
     const result = await recruiterTable.findOne({ email, password })
     if (result) {
-        res.json({
-            code: 200,
-            message: 'Login Successfull',
-            data: result
-        })
+        if (result.isBlock) {
+            res.json({
+                code: 203,
+                message: "This Account is Blocked",
+                data: {}
+            })
+        } else {
+            res.json({
+                code: 200,
+                message: "Login Successful",
+                data: result
+            })
+        }
     }
     else {
         res.json({
             code: 404,
             message: 'Invalid Email or Password',
-            data: []
+            data: {}
         })
     }
 });
@@ -72,7 +80,7 @@ recruiterRoute.post('/recruiter-jobpost', async (req, res) => {
 //Posted Jobs
 recruiterRoute.post('/recruiter-postedjob', async(req,res)=>{
 const {companyId} = req.body;
-const jobPost = await jobPostTable.find({companyId:companyId});
+const jobPost = await jobPostTable.find({companyId:companyId}).sort({createdAt: -1});
 const finalData = await Promise.all(  //store all data that need in frontend
 jobPost.map(async(item)=>{
 const companyDetails = await recruiterTable.findOne({_id:item.companyId});  //store recruites table dets
@@ -103,7 +111,7 @@ res.json({
 //Applied Seekers
 recruiterRoute.post('/recruiter-applied',async(req, res)=>{
     const {companyId} = req.body;
-    const appliedList = await appliedJobTable.find({companyId});
+    const appliedList = await appliedJobTable.find({companyId}).sort({createdAt: -1});
     const finalData = await Promise.all(
         appliedList.map(async(item)=>{
             const jobData = await jobPostTable.findOne({_id:item.jobId});
@@ -170,6 +178,7 @@ recruiterRoute.put('/recruiter-update/:_id', async (req, res) => {
         data: result
     });
 });
+
 
 // delete data
 recruiterRoute.delete('/recruiter-delete/:_id', async (req, res) => {

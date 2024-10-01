@@ -66,6 +66,23 @@ adminRoute.get('/admin-seekerlist', async (req, res) => {
     }
 })
 
+// recruiter List
+adminRoute.get('/admin-recruiterlist', async (req, res) => {
+    try {
+        const result = await recruiterTable.find();
+        res.json({
+            code: 200,
+            message: 'Data Found',
+            data: result
+        })
+    } catch (error) {
+        res.json({
+            code: 404,
+            message: error
+        })
+    }
+})
+
 //update
 adminRoute.put('/admin-update/:_id', async (req, res) => {
     const id = req.params._id;
@@ -92,10 +109,24 @@ adminRoute.put('/admin-update/:_id', async (req, res) => {
     });
 });
 
+//seeker block
 adminRoute.put('/admin-seekerblock/:_id',async(req, res)=>{
     const _id = req.params._id;
     const status = req.body.status;
     const result = await seekerTable.findByIdAndUpdate({_id:_id},
+        {$set:{isBlock: status}},
+        {new: true})
+        res.json({
+            code: 200,
+            message: "Updated Successfully",
+            data: result
+        })
+})
+//recruiter block
+adminRoute.put('/admin-recruiterblock/:_id',async(req, res)=>{
+    const _id = req.params._id;
+    const status = req.body.status;
+    const result = await recruiterTable.findByIdAndUpdate({_id:_id},
         {$set:{isBlock: status}},
         {new: true})
         res.json({

@@ -74,7 +74,7 @@ const [seeker, setSeeker] = useState([]);
                                 </div>
                             </div>
                             <div>
-                                <div onClick={()=>handleBlock(el)} className='form_button mb-4' style={{width:"20%", margin:"0px auto", fontSize:"0.8em"}}>{el.isBlock ? "UNBLOCK" : "BLOCK"}</div>
+                                <div onClick={()=>handleBlock(el)} className='form_button mb-4' style={{width:"90%", margin:"0px auto", fontSize:"0.9em"}}>{el.isBlock ? "UNBLOCK" : "BLOCK"}</div>
                             </div>
                         </div>
                     </div>

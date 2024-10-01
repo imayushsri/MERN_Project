@@ -4,7 +4,6 @@ const { seekerTable } = require('../models/seekerModel');
 const { jobPostTable } = require('../models/jobpost');
 const { recruiterTable } = require('../models/recruiterModel');
 const { appliedJobTable } = require('../models/appliedJobs');
-const { date } = require('yup');
 
 // insert data
 seekerRoute.post('/seeker-register', async (req, res) => {
@@ -68,7 +67,7 @@ seekerRoute.post('/seeker-login', async (req, res) => {
 
 //All Jobs list
 seekerRoute.get('/seeker-joblist', async (req, res) => {
-    const jobPost = await jobPostTable.find();
+    const jobPost = await jobPostTable.find().sort({createdAt: -1});
     const finalData = await Promise.all(  //store all data that need in frontend
         jobPost.map(async (item) => {
             const companyDetails = await recruiterTable.findOne({ _id: item.companyId });  //store recruites table dets
@@ -121,7 +120,7 @@ seekerRoute.post('/seeker-apply', async (req, res) => {
 //Applied list
 seekerRoute.post('/seeker-applied', async (req, res) => {
     const { userId } = req.body;
-    const appliedList = await appliedJobTable.find({ userId });
+    const appliedList = await appliedJobTable.find({ userId }).sort({createdAt: -1});
     const finalData = await Promise.all(
         appliedList.map(async (item) => {
             const jobData = await jobPostTable.findOne({ _id: item.jobId });

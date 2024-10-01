@@ -44,7 +44,7 @@ const { register, handleSubmit, formState: { errors } } = useForm({
       else if(response.data.code == 203){
         alert('Your Account is Blocked, Please Contact to Admin');
       }
-      else if(response.data.code == 302){
+      else{
         alert("Invalid Email or Password!")
       }
   }

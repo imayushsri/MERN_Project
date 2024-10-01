@@ -35,7 +35,7 @@ const SeekerAppliedJob = () => {
                         <div className="row d-flex justify-content-center align-items-center">
                             {/* Logo Column */}
                             <div className="col-md-3 d-flex justify-content-center align-items-center">
-                                <img src={`http://localhost:8000/upload/${el.logo}`} alt="Company Logo" className="img-fluid bg-dark" style={{ maxHeight: '100px' }} />
+                                <img src={`http://localhost:8000/upload/${el.logo}`} alt="Company Logo" className="img-fluid" style={{ maxHeight: '100px' }} />
                             </div>
 
                             {/* Company Name, Job Title, and Job Type Column */}

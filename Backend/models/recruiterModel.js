@@ -8,6 +8,7 @@ const recruiterSchema = new mongoose.Schema({
     contact: { type: Number, required: true },
     password: { type: String, required: true },
     location: { type: String, required: true },
+    isBlock: { type: Boolean, default: false },
     createdAt: { type: Date, default: Date.now() },
     updatedAt: { type: Date, default: Date.now() }
 });

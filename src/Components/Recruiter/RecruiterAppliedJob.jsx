@@ -35,7 +35,7 @@ const RecruiterAppliedJob = () => {
     return (
         <>
             <div className="container my-3">
-                
+            <h3 className="tc_h2 mb-3">APPLIERS ON JOBS</h3>
                     {jobData.map((el) => {
                         console.log(el);
                         

@@ -10,6 +10,11 @@
     color: #242b5e !important;
     margin-left: 22px;
 }
+.nav_icons{
+    font-size: 16px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
 .nav_font:hover{
     color: #fa236a !important;
 }
@@ -147,7 +152,7 @@
 .tc_p{
     text-align: center;
     color: #fb246a;
-    font-size: 1.2vw;
+    font-size: 14px;
     margin: 0px;
     margin-bottom: 10px;
 }
@@ -208,7 +213,7 @@
 /* Upload Cv */
 .uploadcv{
 min-height: 10px;
-background: #4c5595;
+background: url(/public/img/gallery/how-applybg.png);
 color: white;
 display: flex;
 align-items: center;
@@ -468,6 +473,7 @@ margin-bottom: 5vw;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 65px;
 }
 .news_body{
     display: flex;
@@ -774,13 +780,18 @@ margin-bottom: 15px;
   .detail-label {
     /* font-weight: bold; */
     width: 30%;
-    text-align: left;
-    padding-right: 10px;
+    text-align: right;
+    padding-right: 20px;
+    font-weight: 600;
+    font-size: 14px;
   }
   
   .detail-value {
     width: 70%;
     text-align: left;
+    font-weight: 600;
+    color: #074f88;
+    font-size: 14px;
   }
   
 /* Form End */
@@ -865,6 +876,81 @@ margin-bottom: 15px;
 }
   
 /* Recruiter Posted job */
+
+/*  */
+
+/* Contact */
+.contact_row{
+   min-height: 350px;
+
+}
+ .contact_container{
+   background: white;
+   border-radius: 15px;
+   box-shadow: 0px 0px 2px black;
+   min-height: 450px;
+ }
+
+ .contact_img{
+   width: 100%;
+   height: 100%;
+ }
+
+ .contact_msg{
+   height: 200px;
+ }
+
+ .contact_heading{
+   color: #074f88;
+ }
+
+.contact_para{
+   color: #fb246a
+}
+/* Contact */
+
+/* About */
+.about-container {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .panels {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .panel {
+    width: 45%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .recruiter-panel {
+    background-color: #e0f7fa;
+  }
+  
+  .seeker-panel {
+    background-color: #f1f8e9;
+  }
+  
+  .about-container h2, h3 {
+    color: #333;
+  }
+  
+ .panel ul {
+    list-style-type: square;
+    text-align: left;
+  }
+  
+ .about-container p {
+    color: #666;
+  }
+  
+/* About */
 
 @media (max-width:650px) {
     .hero_find{

@@ -41,8 +41,11 @@ const { register, handleSubmit, formState: { errors } } = useForm({
         alert('Login Successfull!');
         navigate('/recruiter');
       }
+      else if(response.data.code == 203){
+        alert('Your Account is Blocked, Please Contact to Admin');
+      }
       else{
-        alert('Invalid Email or Password!');
+        alert("Invalid Email or Password!")
       }
   }
 
