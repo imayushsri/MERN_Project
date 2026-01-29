@@ -4,6 +4,8 @@ import { yupResolver } from '@hookform/resolvers/yup';   // Form Validation
 import * as yup from 'yup';   // Form Validation
 import axios from 'axios';  // fetch data
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const schema = yup
   .object()
@@ -16,66 +18,88 @@ const AdminLogin = () => {
 
   const navigate = useNavigate();
 
-// form validation useform Hook
-const { register, handleSubmit, formState: { errors } } = useForm({
+  // form validation useform Hook
+  const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const handleData = async(data) =>{
+  const handleData = async (data) => {
     const payload = {
-      email : data.email, 
+      email: data.email,
       password: data.password
     };
 
     // API Call
     const response = await axios.post('http://localhost:8000/api/admin-login', payload, {
-      headers:{
-        'Content-Type' : "application/json"
+      headers: {
+        'Content-Type': "application/json"
       }
     });
 
     // console.log(response);
-    if(response.data.code == 200){
+    if (response.data.code == 200) {
       localStorage.setItem('data', JSON.stringify(response.data.data));
       localStorage.setItem('userType', JSON.stringify("admin"));  // to show dynamic navbar
-      alert('Login Successfull!');
-      navigate('/admin');
+
+      // Show success toast
+      toast.success("Login Successful!", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
+      setTimeout(() => {
+        navigate('/admin');
+      }, 2000);
     }
-    else{
-      alert('Invalid Email or Password!');
+    else {
+      toast.error("Invalid Email or Password!", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
 
   }
 
   return (
     <>
+      <ToastContainer/>
       <div className="form">
-                <div className="form_icon">
-                    <img src="../public/img/icon/admin.png" height='80px' />
-                </div>
-                <h2 className='form_h2'>Admin Sign In</h2>
-                <form onSubmit={handleSubmit(handleData)}>
-                    {/* First row: Name and Email */}
-                    <div className="form-row-login">
-                        <div>
-                            <input {...register('email')} className='form_input' type="email" name="email" placeholder='Enter Your Email' />
-                            {errors.email?.message && <span className='err_span'>{errors.email?.message}</span>}
+        <div className="form_icon">
+          <img src="../public/img/icon/admin.png" height='80px' />
+        </div>
+        <h2 className='form_h2'>Admin Sign In</h2>
+        <form onSubmit={handleSubmit(handleData)}>
+          {/* First row: Name and Email */}
+          <div className="form-row-login">
+            <div>
+              <input {...register('email')} className='form_input' type="email" name="email" placeholder='Enter Your Email' />
+              {errors.email?.message && <span className='err_span'>{errors.email?.message}</span>}
 
-                        </div>
-                    </div>
-                    <div className="form-row-login">
-                        <div>
-                            <input {...register('password')} className='form_input' type="password" name="password" placeholder='Enter Password' />
-                            {errors.password?.message && <span className='err_span'>{errors.password?.message}</span>}
-
-                        </div>
-                    </div>
-                    {/* Submit Button */}
-                    <div>
-                        <input type='submit' className='form_button' value='LOGIN' />
-                    </div>
-                </form>
             </div>
+          </div>
+          <div className="form-row-login">
+            <div>
+              <input {...register('password')} className='form_input' type="password" name="password" placeholder='Enter Password' />
+              {errors.password?.message && <span className='err_span'>{errors.password?.message}</span>}
+
+            </div>
+          </div>
+          {/* Submit Button */}
+          <div>
+            <input type='submit' className='form_button' value='LOGIN' />
+          </div>
+        </form>
+      </div>
     </>
   )
 }
